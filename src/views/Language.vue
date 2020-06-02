@@ -20,18 +20,22 @@
         <input
           id="short_name"
           type="text"
-          :class="{ 'has-error': submitting && invalidEmail }"
-          v-model="email"
+          :class="{ 'has-error': submitting && invalidShortName }"
+          v-model="shortName"
           @focus="clearStatus"
           @keypress="clearStatus"
           required
         />
       </p>
 
-      <p v-if="submitting && error" class="error-message">Please enter valid information!</p>
-      <p v-if="success" class="success-message">✅ Employee successfully added</p>
+      <p v-if="submitting && error" class="error-message">
+        Please enter valid information!
+      </p>
+      <p v-if="success" class="success-message">
+        ✅ Language successfully added
+      </p>
 
-      <p>
+      <p id="submitButton">
         <input type="submit" value="Submit" />
       </p>
     </form>
@@ -40,64 +44,67 @@
 
 <script>
 export default {
-  name: "language_form",
+  name: 'language_form',
   data() {
     return {
       submitting: false,
       error: false,
       success: false,
       id: null,
-      name: "",
-      shortName: ""
-    };
+      name: '',
+      shortName: ''
+    }
   },
   methods: {
     clearStatus() {
-      this.success = false;
-      this.error = false;
+      this.success = false
+      this.error = false
     },
     addLanguage() {
-      this.submitting = true;
-      this.clearStatus();
+      this.submitting = true
+      this.clearStatus()
 
       if (this.invalidName || this.invalidShortName) {
-        this.error = true;
-        return;
+        this.error = true
+        return
       }
 
       let language_ = {
         name: this.name,
-        email: this.shortName
-      };
+        shortName: this.shortName
+      }
 
       // Call vuex action 'addLanguage'
-      this.$store.dispatch("addLanguage", language_);
-      this.$refs.name.focus();
+      this.$store.dispatch('addLanguage', language_)
+      this.$refs.name.focus()
 
-      this.name = null;
-      this.shortName = null;
+      this.name = null
+      this.shortName = null
 
-      this.error = false;
-      this.success = true;
-      this.submitting = false;
+      this.error = false
+      this.success = true
+      this.submitting = false
     }
   },
   computed: {
     invalidName() {
-      return this.name === "";
+      return this.name === ''
     },
     invalidShortName() {
-      return this.shortName === "" || this.shortName.length > 3;
+      return this.shortName === '' || this.shortName.length > 3
     }
+  },
+  created() {
+    this.$store.dispatch('getLanguages')
   }
-};
+}
 </script>
 
 <style scoped>
 form {
   margin-bottom: 2rem;
 }
-[class*="-message"] {
+[class*='-message'] {
   font-weight: 500;
 }
 
