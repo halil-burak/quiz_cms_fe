@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Language from '../views/languages/Dashboard.vue'
-import Platform from '../views/Platform'
-import Category from '../views/Category'
-import Question from '../views/Question'
-import Quiz from '../views/Quiz'
+import Platform from '../views/platforms/Dashboard.vue'
+import Category from '../views/categories/Dashboard.vue'
+import Question from '../views/questions/Dashboard.vue'
+import Quiz from '../views/quizzes/Dashboard.vue'
 
 Vue.use(VueRouter)
 
