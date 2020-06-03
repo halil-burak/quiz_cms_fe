@@ -33,6 +33,9 @@ export default {
     languages() {
       return this.$store.getters.languageList
     }
+  },
+  mounted() {
+    this.$store.dispatch('getLanguages')
   }
 }
 </script>

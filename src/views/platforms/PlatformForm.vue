@@ -27,8 +27,6 @@
           required
         />
       </p>
-      <!--todo Add table for listing categories per platform-->
-      <!--todo Add table for listing all platforms-->
       <p v-if="submitting && error" class="error-message">
         Please enter valid description!
       </p>
