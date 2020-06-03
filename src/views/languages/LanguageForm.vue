@@ -87,6 +87,9 @@ export default {
     }
   },
   computed: {
+    languages() {
+      return this.$store.getters.languageList
+    },
     invalidName() {
       return this.name === ''
     },
@@ -94,7 +97,7 @@ export default {
       return this.shortName === '' || this.shortName.length > 3
     }
   },
-  created() {
+  mounted() {
     this.$store.dispatch('getLanguages')
   }
 }

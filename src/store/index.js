@@ -24,6 +24,11 @@ export default new Vuex.Store({
       console.log('Fetching languages...')
       state.languages = data
       console.log('Fetched languages.')
+    },
+    ADD_LANGUAGE(state, data) {
+      console.log('Adding a language...')
+      state.languages.push(data)
+      console.log('Added a language.')
     }
   },
   actions: {
@@ -33,6 +38,19 @@ export default new Vuex.Store({
         .then(response => response.json())
         .then(data => commit('FETCH_LANGUAGES', data))
         .catch(err => requestError(err, 'languages'))
+    },
+    addLanguage({ commit }, language) {
+      console.log('Requesting to add a language...')
+      if (language) {
+        fetch('http://localhost:8080/api/languages/add', {
+          method: 'POST',
+          body: JSON.stringify(language),
+          headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        })
+          .then(response => response.json())
+          .then(data => commit('ADD_LANGUAGE', data))
+          .catch(err => requestError(err, 'languages'))
+      }
     }
   },
   modules: {}
